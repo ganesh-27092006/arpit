@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart AI Career & Skill Recommendation System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Auth Card -->
+    <div id="authSection" class="card auth-card">
+      <div class="auth-toggle">
+        <button id="loginTab" class="tab-btn active" onclick="switchAuthTab('login')">Sign In</button>
+        <button id="signupTab" class="tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <h2><i class="fa-solid fa-right-to-bracket"></i> Student Login</h2>
+        <div class="input-group">
+          <label><i class="fa-solid fa-id-card"></i> Student ID</label>
+          <input type="text" id="loginStudentId" placeholder="Enter Student ID" required>
+        </div>
+        <div class="input-group">
+          <label><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="loginBtn">Login</button>
+      </form>
+
+      <form id="signupForm" class="auth-form hidden">
+        <h2><i class="fa-solid fa-user-plus"></i> Student Registration</h2>
+        <div class="input-group">
+          <label><i class="fa-solid fa-user"></i> Full Name</label>
+          <input type="text" id="signupName" placeholder="Enter Name" required>
+        </div>
+        <div class="input-group">
+          <label><i class="fa-solid fa-id-card"></i> Student ID</label>
+          <input type="text" id="signupStudentId" placeholder="Enter Unique Student ID" required>
+        </div>
+        <div class="input-group">
+          <label><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="signupPassword" placeholder="Set Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="signupBtn">Sign Up</button>
+      </form>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboardSection" class="dashboard-section hidden">
+      <header class="dashboard-header">
+        <div>
+          <h1>Welcome, <span id="userDisplayName">Student</span>! 👋</h1>
+          <p>Define your career path and discover next-level skill recommendations.</p>
+        </div>
+        <button class="btn btn-logout" onclick="logout()"><i class="fa-solid fa-power-off"></i> Logout</button>
+      </header>
+
+      <div class="grid-layout">
+        <!-- Form Section -->
+        <div class="card">
+          <h2><i class="fa-solid fa-compass"></i> Career & Skill Profiling</h2>
+          <form id="profileForm">
+            <div class="input-group">
+              <label><i class="fa-solid fa-briefcase"></i> Select Career Goal</label>
+              <select id="careerInterest" required>
+                <option value="" disabled selected>Choose your target role...</option>
+                <option value="Full-Stack Developer">Full-Stack Web Developer</option>
+                <option value="Data Scientist">Data Scientist & AI Specialist</option>
+                <option value="Digital Marketing Manager">Digital Marketing Manager</option>
+                <option value="Mechanical Design Engineer">Mechanical Design Engineer</option>
+                <option value="Financial Analyst">Financial Analyst & Investment Advisor</option>
+                <option value="Healthcare Research Assistant">Healthcare & Clinical Research Assistant</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label><i class="fa-solid fa-code"></i> Skills Gained So Far</label>
+              <textarea id="currentSkills" rows="3" placeholder="e.g. HTML, CSS, C, Basic Excel, AutoCAD" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="recommendBtn">Analyze & Save Recommendation</button>
+          </form>
+        </div>
+
+        <!-- Result Section -->
+        <div class="card">
+          <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Recommended Next Skills</h2>
+          <div id="recommendationOutput" class="output-box">
+            <p class="placeholder-text">Fill in your career target and current skills to unlock your personalized learning path.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Table Section (Retrieved from Google Sheet) -->
+      <div class="card" style="margin-top: 20px;">
+        <h2><i class="fa-solid fa-history"></i> Your Past Recommendations (Retrieved from Google Sheet)</h2>
+        <div style="overflow-x: auto;">
+          <table id="historyTable" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <thead>
+              <tr style="background: #f1f5f9; text-align: left;">
+                <th style="padding: 10px; border: 1px solid #e2e8f0;">Date</th>
+                <th style="padding: 10px; border: 1px solid #e2e8f0;">Career Goal</th>
+                <th style="padding: 10px; border: 1px solid #e2e8f0;">Skills Gained</th>
+                <th style="padding: 10px; border: 1px solid #e2e8f0;">Recommended Skills</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr><td colspan="4" style="text-align: center; padding: 15px;">Loading history...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
